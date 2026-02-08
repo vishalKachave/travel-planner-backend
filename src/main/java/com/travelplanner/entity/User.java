@@ -1,64 +1,89 @@
-package com.travelplanner.entity; 
-// Package where this class belongs (entity = DB table mapping)
+package com.travelplanner.entity;
 
-import jakarta.persistence.*; 
-// JPA annotations like @Entity, @Id, @ManyToOne
+// JPA annotation imports
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
-import java.time.LocalDateTime; 
-// To store date & time (createdAt)
-
-/**
- * Marks this class as a database table
- */
-@Entity  
-
-/**
- * Maps this class to "users" table in database
- */
-@Table(name = "users")
+// Marks this class as a database table
+@Entity
 public class User {
 
-    /**
-     * Primary Key of users table
-     */
-    @Id  
-
-    /**
-     * Auto-increment ID (1,2,3...)
-     */
+    // Primary key of user table
+    @Id
+    // Auto-increment value (1,2,3...)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * User's full name
-     */
+    // Stores user's name
     private String name;
 
-    /**
-     * User's email address
-     */
+    // Stores user's email
     private String email;
 
-    /**
-     * Encrypted password
-     */
+    // Stores user's password (encrypted later)
     private String password;
 
-    /**
-     * Many users can have ONE role
-     * Example: many users → USER role
-     */
-    @ManyToOne  
-
-    /**
-     * Foreign key column in users table
-     * role_id references roles.id
-     */
+    // Many users can have the same role (USER / ADMIN)
+    @ManyToOne
+    // Creates role_id column in user table (foreign key)
     @JoinColumn(name = "role_id")
     private Role role;
 
-    /**
-     * Date & time when user was created
-     */
-    private LocalDateTime createdAt;
+    // Default constructor required by JPA
+    public User() {
+    }
+
+    // Constructor without id (id is auto-generated)
+    public User(String name, String email, String password, Role role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    // Getter and Setter methods
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+ 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+ 
+    public String getPassword() {
+        return password;
+    }
+ 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+ 
+    public Role getRole() {
+        return role;
+    }
+ 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

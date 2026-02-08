@@ -1,12 +1,13 @@
 package com.travelplanner.repository;
 
-import com.travelplanner.entity.Role;
+// Spring Data JPA repository support
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-// Marks this as a Spring repository bean
+// Import Role entity
+import com.travelplanner.entity.Role;
+
+// This interface handles DB operations for Role table
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    // JpaRepository provides all CRUD operations automatically
-    // <Role, Long> → Role is entity, Long is type of primary key
+    // No code needed now
+    // JpaRepository already provides save(), findById(), findAll(), delete()
 }
